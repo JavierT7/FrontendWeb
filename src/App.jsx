@@ -5,7 +5,7 @@ import './App.css'
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Sidebar } from './components/Sidebar';
-import { MainContent } from './components/Maincontent';
+import { MainContent } from './components/MainContent';
 import { Login } from './components/Login';
 
 function App() {
