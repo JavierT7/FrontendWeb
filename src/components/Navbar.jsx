@@ -1,4 +1,4 @@
-export function Navbar(){
+export function Navbar({email}){
     return(
         <nav className="navbar navbar-expand-lg navbar-light py-4">
             <div className="container-fluid">
@@ -15,7 +15,8 @@ export function Navbar(){
                         <li class="nav-item me-4"><a class="nav-link" href="#">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Contact us</a></li>
                     </ul>
-                    <div><a class="btn btn-outline-secondary me-2" href="#">Sign In</a><a class="btn btn-primary" href="#">Sign Up</a></div>
+                    <div><h1>{email}</h1></div>
+                    {/*<div><a class="btn btn-outline-secondary me-2" href="#">Sign In</a><a class="btn btn-primary" href="#">Sign Up</a></div>*/}
                 </div>
             </div>
         </nav>
