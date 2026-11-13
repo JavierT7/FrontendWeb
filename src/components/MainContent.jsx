@@ -1,6 +1,7 @@
 import { Producto } from "./Producto"
 import { useState, useEffect } from 'react';
 import { queryGraphQL } from "../services/api";
+import { ProductoForm } from "./ProductoForm";
 
 export function MainContent(){
 
@@ -8,12 +9,7 @@ export function MainContent(){
     const [cargando, setCargando] = useState(true);
     const [productos, setProductos] = useState([]);
     const [nombre, setNombre] = useState("cargando...");
-
-    useEffect(()=>{
-        setCargando(true);
-        
-        console.log(busqueda);
-    }, [busqueda]);
+    const [vista, setVista] = useState('lista');
 
     const GET_DATA = `
       query {
@@ -58,37 +54,48 @@ export function MainContent(){
         p.nombre.toLowerCase().includes(busqueda.toLowerCase())
     );
 
-  return(
-    <div className="p-3 bg-white rounded-3 shadow-sm">
-      <div className="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
-        <div>
-          <h3 className="fw-bold m-0 text-dark">Catálogo de Productos</h3>
-          <small className="text-muted">Mostrando {productos.length} artículos disponibles</small>
+  if(vista == 'lista'){
+    return(
+      <div className="p-3 bg-white rounded-3 shadow-sm">
+        <div className="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+          <div className="d-flex justify-content-between w-100">
+            <div>
+              <h3 className="fw-bold m-0 text-dark">Catálogo de Productos</h3>
+              <small className="text-muted">Mostrando {productos.length} artículos disponibles</small>
+            </div>
+            <div>
+              <button className="btn btn-outline-primary btn-sm mx-2" onClick={() => {setVista('nuevo')}}>+ Nuevo</button>
+            </div>
+          </div>
+
+          <div className="mb-4">
+              <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Buscar..."
+                  value={busqueda}
+                  onChange={(e) => setBusqueda(e.target.value)}
+              />
+          </div>
         </div>
 
-        <div className="mb-4">
-            <input
-                 type="text"
-                 className="form-control"
-                 placeholder="Buscar..."
-                 value={busqueda}
-                 onChange={(e) => setBusqueda(e.target.value)}
+
+        <div className="row g-3">
+          {productosFiltrados.map((p, index) => (
+            <Producto 
+              key={index} 
+              nombre={p.nombre} 
+              precio={p.precio}
+              categoria={p.categoria}
+              image={p.imagen}
             />
+          ))}
         </div>
       </div>
-
-
-      <div className="row g-3">
-        {productosFiltrados.map((p) => (
-          <Producto 
-            key={p.id} 
-            nombre={p.nombre} 
-            precio={p.precio}
-            categoria={p.categoria}
-            image={p.imagen}
-          />
-        ))}
-      </div>
-    </div>
-  )
+    )
+  }else{
+    return(
+      <ProductoForm setVista={setVista}/>
+    )
+  }
 }

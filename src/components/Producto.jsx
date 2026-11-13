@@ -9,7 +9,7 @@ export function Producto({ nombre, precio, categoria = "Electrónica", image }) 
 
             <div className="row">
               <div className="col">
-                <img src={image} className="img"/>
+                <img src={image} className="img" style={{width: 100, height: 100}}/>
               </div>
 
               <div className="col">

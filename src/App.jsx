@@ -34,7 +34,7 @@ function App() {
                   </aside>
                   <main className="col-md-9 col-lg-10">
                     { vistaActual === 'productos' && (
-                      <MainContent />
+                      <MainContent setVistaActual={setVistaActual}/>
                     )}
 
                     { vistaActual === 'perfil' && (

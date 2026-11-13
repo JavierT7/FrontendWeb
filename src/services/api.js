@@ -1,4 +1,8 @@
-const GRAPHQL_URL = 'https://rickandmortyapi.com/graphql';
+//const GRAPHQL_URL = 'https://rickandmortyapi.com/graphql';
+//const GRAPHQL_URL = 'https://graphqlzero.almansi.me/api';
+
+const GRAPHQL_URL = import.meta.env.VITE_GRAPHQL_URL;
+
 
 export async function queryGraphQL(query, variables = {}){
     //OBTENER TOKEN DEL NAVEGADOR SI ES QUE EXISTE
